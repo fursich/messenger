@@ -7,9 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<p class='notice'><%= notice %></p>
-<%= yield %>
+  
+  <% if user_signed_in? %>
+    <div class='logout_wrapper'>
+      <%= link_to "log out", destroy_user_session_path, method: :delete %>
+    </div>
+  <% end %>
+  
+  <p class='notice'><%= notice %></p>
+  <%= yield %>
 
 </body>
 </html>
