@@ -27,6 +27,10 @@
       background-color: #C1EFFF;
     }
 
+    &.reply {
+      margin-top: 0px;
+    }
+      
     p {
       margin: 0;
     }
@@ -47,9 +51,21 @@
       word-wrap: break-word;
     }
     .btn {
-      float: right;
-      margin-top: -35px;
+      // float: right;
+      // margin-top: -35px;
     }
+    .operation {
+      display: inline-block;
+      button {
+        margin-bottom: 3px;
+      }
+      .button_to {
+        input.btn {
+          width: 50px;
+        }
+      }
+    }
+
   }
   .user_filter {
     margin-bottom: 20px;

@@ -1,67 +1,57 @@
 <div class = 'wrapper timeline_wrapper'>
-    
-    <div class = 'input'>
-        <%= form_for @input_message do |f| %>
-        <div class = 'form-group'>
-            <%= f.label :message %>
-            <% if @input_message.persisted? %>
-                編集中
+  
+  <div class = 'input'>
+    <%= form_for @input_message, remote: true, html: {class: 'input_message_form'}, format: :json, authenticity_token: true do |f| %>
+      <div class = 'form-group'>
+        <%= f.label :message %>
+        <% if @input_message.persisted? %>
+          編集中
+        <% elsif @reply_timeline %>
+          <%= @reply_timeline.user.name %>の「<%= truncate(@reply_timeline.message, length: 7) %>」に返信
+        <% end %>
+        </br>
+        <%= f.text_area :message, class: 'form-control', row: 3 %>
+      </div>
+      <div class = 'actions clearfix'>
+        <% if flash[:alert] %>
+          <div class='alert'>
+            <p class='alert'><%= flash[:alert] %></p>
+          </div>
+        <% end %>
+  
+        <div class='post'>
+          <% if @input_message.persisted? || @reply_timeline %>
+            <%= link_to root_path do %>
+              <%= button_tag 'Cancel', class: 'btn btn-default' %>
             <% end %>
-            </br>
-            <%= f.text_area :message, class: 'form-control', row: 3 %>
+          <% end %>
+          <%= f.submit 'Post', class: 'btn btn-binary post' %>
+          <%= f.submit 'AjaxPost', class: 'btn btn-binary ajaxpost' %>
         </div>
-        <div class = 'actions clearfix'>
-            <% if flash[:alert] %>
-                <div class='alert'>
-                    <p class='alert'><%= flash[:alert] %></p>
-                </div>
-            <% end %>
+      </div>
+    <%= f.hidden_field :reply_id, value: @reply_timeline.id if @reply_timeline %>
+    <% end %>
+  </div>
+  
+  <div class = 'user-filter'>
+    <%= form_tag filter_by_user_timelines_path do |f| %>
+      <div class = 'form-group'>
+        <label>ユーザーフィルター</label><br />
+        <%= select_tag :filter_user_id, options_for_select(@users.map {|m| [m.name, m.id]}, params[:filter_user_id]), prompt: 'フィルターなし', class: 'form-control' %>
+      </div>
+      <div class = 'actions'>
+        <%= submit_tag 'Apply', class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
 
-            <div class='post'>
-                <% if @input_message.persisted? %>
-                    <%= link_to root_path do %>
-                        <%= button_tag 'Cancel', class: 'btn btn-default' %>
-                    <% end %>
-                <% end %>
-                <%= f.submit 'Post', class: 'btn btn-binary' %>
-            </div>
-
-        </div>
-        <% end %>
-    </div>
+  <div class='timeline'>
+    <% @timeline.each do |t| %>
     
-    <div class = 'user-filter'>
-        <%= form_tag filter_by_user_timelines_path do |f| %>
-            <div class = 'form-group'>
-                <label>ユーザーフィルター</label><br />
-                <%= select_tag :filter_user_id, options_for_select(@users.map {|m| [m.name, m.id]}, params[:filter_user_id]), prompt: 'フィルターなし', class: 'form-control' %>
-            </div>
-            <div class = 'actions'>
-                <%= submit_tag 'Apply', class: 'btn btn-primary' %>
-            </div>
-        <% end %>
-    </div>
-
-    <div class='timeline'>
-        <% @timeline.each do |t| %>
-            <div class="per <%= 'mine' if mypost?(t) %>" >
-                <p class='icon'>
-                    <% if t.user.thumbnail? %>
-                        <%= image_tag t.user.thumbnail.url %>
-                    <% else %>
-                        NO IMAGE
-                    <% end %>
-                </p>
-                <%= simple_format t.message, class: 'message' %>
-                </p>
-                <% if mypost?(t) %>
-                    <%= link_to root_path(id: t.id, message: t.message) do %>
-                        <%= button_tag 'Edit', class: 'btn btn-info' %>
-                    <% end %>
-                <% end %>
-            </div>
-        <% end %>
-    </div>
-    
-    
+      <%= render 'timelines/timeline', t: t %>
+      
+    <% end %>
+  </div>
+  
+  
 </div>
