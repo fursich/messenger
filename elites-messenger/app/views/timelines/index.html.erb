@@ -13,12 +13,14 @@
         <%= f.text_area :message, class: 'form-control', row: 3 %>
       </div>
       <div class = 'actions clearfix'>
+        <div class='alert js-alert'></div>
         <% if flash[:alert] %>
           <div class='alert'>
-            <p class='alert'><%= flash[:alert] %></p>
+            <% flash[:alert].each do |message| %>
+              <p class='alert html-alert'><%= message %></p>
+            <% end %>
           </div>
         <% end %>
-  
         <div class='post'>
           <% if @input_message.persisted? || @reply_timeline %>
             <%= link_to root_path do %>
