@@ -15,11 +15,9 @@
       <div class = 'actions clearfix'>
         <div class='alert js-alert'></div>
         <% if flash[:alert] %>
-          <div class='alert'>
-            <% flash[:alert].each do |message| %>
-              <p class='alert html-alert'><%= message %></p>
-            <% end %>
-          </div>
+          <% flash[:alert].each do |message| %>
+            <p class='alert html-alert'><%= message %></p>
+          <% end %>
         <% end %>
         <div class='post'>
           <% if @input_message.persisted? || @reply_timeline %>

@@ -11,11 +11,12 @@ $(function(){
         
         if (status=='success') {
             var json = JSON.parse(data.responseText);
-            if ($(json.error) == null) {
+            if (json.js_error == null) {
                 $('div.timeline').prepend($(json.timeline));
             } else {
+                $('.html-alert').empty();
                 $('.js-alert').empty();
-                $('.js-alert').append($(json.error));
+                $('.js-alert').append($(json.js_error));
             }
         }
         
