@@ -23,6 +23,8 @@
     <%= link_to root_path(reply_id: t.id) do %>
       <%= button_tag 'Re', class: 'btn btn-info' %>
     <% end %>
+    <%= link_to 'Like', root_path(id: t.id, liked: true) %>
+        <!--とりあえずlikeを実装。後から、「再度クリックしたらunlikeできる」仕様にしたい-->
   <% end %>
 </div>
 
