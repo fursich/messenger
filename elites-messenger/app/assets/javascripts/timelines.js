@@ -16,7 +16,7 @@ $(function(){
             } else {
                 $('.html-alert').empty();
                 $('.js-alert').empty();
-                $('.js-alert').append($(json.js_error));
+                $('.js-alert').append($('<p>'+json.js_error+'</p>'));
             }
         }
         

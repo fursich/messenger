@@ -45,7 +45,7 @@ class TimelinesController < ApplicationController
           redirect_to action: :index
         end
         format.json do
-          render json: {js_error: '<p>Messageは140文字以内で入力してください</p>'}
+          render json: {js_error: timeline.errors.full_messages}
         end
       end
     end
