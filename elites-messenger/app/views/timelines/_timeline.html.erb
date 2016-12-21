@@ -25,6 +25,11 @@
     <% end %>
     <%= link_to 'Like', root_path(id: t.id, liked: true) %>
         <!--とりあえずlikeを実装。後から、「再度クリックしたらunlikeできる」仕様にしたい-->
+    <% if t.likes.count > 0 %>
+      <hr />
+      いいね！<%= t.likes.count %>件
+    <% end %>
+
   <% end %>
 </div>
 
