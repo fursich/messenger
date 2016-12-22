@@ -49,7 +49,6 @@ class TimelinesController < ApplicationController
         end
       end
     end
-    
   end
   
   def destroy
