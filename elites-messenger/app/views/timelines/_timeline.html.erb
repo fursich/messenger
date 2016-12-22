@@ -23,13 +23,14 @@
     <%= link_to root_path(reply_id: t.id) do %>
       <%= button_tag 'Re', class: 'btn btn-info' %>
     <% end %>
-    <%= link_to 'Like', root_path(id: t.id, liked: true) %>
+    <% unless t.likes.exists?(user_id: current_user) %>
+      <%= link_to 'Like', timeline_likes_path(timeline_id: t.id), method: :post %>
         <!--とりあえずlikeを実装。後から、「再度クリックしたらunlikeできる」仕様にしたい-->
-    <% if t.likes.count > 0 %>
-      <hr />
+    <% end %>
+    <hr />
+    <% if t.likes.count>0 %>
       いいね！<%= t.likes.count %>件
     <% end %>
-
   <% end %>
 </div>
 
