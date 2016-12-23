@@ -11,7 +11,13 @@ $(function(){
         
         if (status=='success') {
             var json = JSON.parse(data.responseText);
-            $('div.timeline').prepend($(json.timeline));
+            if (json.js_error == null) {
+                $('div.timeline').prepend($(json.timeline));
+            } else {
+                $('.html-alert').empty();
+                $('.js-alert').empty();
+                $('.js-alert').append($('<p>'+json.js_error+'</p>'));
+            }
         }
         
     });

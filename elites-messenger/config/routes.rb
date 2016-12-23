@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root to: 'timelines#index'
 
   devise_for :users
+
   resources :timelines do
+    resources :likes, only: :create
     collection do
       post 'filter_by_user'
     end

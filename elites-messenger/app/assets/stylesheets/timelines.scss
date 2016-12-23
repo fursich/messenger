@@ -14,63 +14,77 @@
             float: right;
         }
     }
-}
 
-.timeline {
-  .per {
-    border-radius: 5px;
-    padding: 10px;
-    margin-top: 20px;
-
-    background-color: #DADADA;
-    &.mine {
-      background-color: #C1EFFF;
-    }
-
-    &.reply {
-      margin-top: 0px;
-    }
-      
-    p {
-      margin: 0;
-    }
-    .icon {
-      display: inline-block;
-      width: 70px;
-      vertical-align: top;
-      img {
-        max-width: 100%;
-        height: auto;
+  .timeline {
+    .per {
+      border-radius: 5px;
+      padding: 10px;
+      margin-top: 20px;
+  
+      background-color: #DADADA;
+      &.mine {
+        background-color: #C1EFFF;
       }
-    }
-    .message {
-      display: inline-block;
-      margin-left: 10px;
-      width: 500px;
-      vertical-align: top;
-      word-wrap: break-word;
-    }
-    .btn {
-      // float: right;
-      // margin-top: -35px;
-    }
-    .operation {
-      display: inline-block;
-      button {
-        margin-bottom: 3px;
+  
+      &.reply {
+        margin-top: 0px;
       }
-      .button_to {
-        input.btn {
-          width: 50px;
+        
+      p {
+        margin: 0;
+      }
+      .icon {
+        display: inline-block;
+        width: 70px;
+        vertical-align: top;
+        img {
+          max-width: 100%;
+          height: auto;
         }
       }
+      .message {
+        display: inline-block;
+        margin-left: 10px;
+        width: 500px;
+        vertical-align: top;
+        word-wrap: break-word;
+      }
+      .operation {
+        display: inline-block;
+        button {
+          margin-bottom: 3px;
+        }
+        .button_to {
+          input.btn {
+            width: 50px;
+          }
+        }
+      }
+      
+      .clickale-like-link {
+        font-size: 90%;
+        margin-top: 5px;
+      }
+      .likes-counter {
+        font-size: 80%;
+        color: #666;
+        hr {
+          border: 0;
+          height: 1px;
+          background-color: #ccc;
+          margin: 5px 0;
+        }
+      }
+  
     }
-
   }
-  .user_filter {
+
+  .user-filter {
     margin-bottom: 20px;
     .actions {
       text-align: right;
     }
   }
 }
+
+
