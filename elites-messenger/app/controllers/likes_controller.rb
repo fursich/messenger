@@ -1,12 +1,10 @@
 class LikesController < ApplicationController
 
   def create
-    like = Like.new
 
     t_id = params[:timeline_id]
+    like = Like.find_or_initialize_by(timeline_id: t_id, user_id: current_user.id)
 
-    like.timeline_id = t_id
-    like.user_id = current_user.id
     like.reaction = true
     
 
