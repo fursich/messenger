@@ -7,4 +7,7 @@ class Reaction < ActiveRecord::Base
     validates   :emotion, presence: true
     validates   :timeline_id, presence: true
     validates   :user_id, presence: true
+
+
 end
+

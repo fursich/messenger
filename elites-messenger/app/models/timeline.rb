@@ -12,4 +12,7 @@ class Timeline < ActiveRecord::Base
     scope :not_reply, -> do
         where(reply_id: nil)
     end
+    def number_of_reactions (emo)
+        self.reactions.where(emotion: Reaction.emotions[emo]).count
+    end
 end

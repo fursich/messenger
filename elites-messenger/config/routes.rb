@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :timelines do
-    resources :likes, only: :create
+    member do
+      post 'like/:emo_id' => 'likes#create', as: 'create_like_on'
+    end
     collection do
       post 'filter_by_user'
     end

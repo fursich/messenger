@@ -2,20 +2,22 @@ class LikesController < ApplicationController
 
   def create
 
-    t_id = params[:timeline_id]
+    t_id = params[:id]
+    e_id = params[:emo_id]
+
     reaction = Reaction.find_or_initialize_by(timeline_id: t_id, user_id: current_user.id)
 
-    reaction.emotion = :like
-    
+    reaction.emotion = Reaction.emotions[e_id]
+
     if reaction.save
       respond_to do |format|
         format.html do
           redirect_to root_path
         end
         format.json do
-          total_likes = Reaction.like.where(timeline_id: t_id).count
+          # total_likes = Reaction.like.where(timeline_id: t_id).count
 
-          html = render_to_string partial: 'likes/like', layout: false, formats: :html, locals: {ctr: total_likes}
+          html = render_to_string partial: 'likes/like', layout: false, formats: :html, locals: {t_id: t_id}
           render json: {likes_count_html: html, t_id: t_id, saved: 'true'}
 
           # render json: {timeline: total_likes}
