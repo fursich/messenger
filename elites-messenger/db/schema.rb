@@ -13,15 +13,16 @@
 
 ActiveRecord::Schema.define(version: 20161221083341) do
 
-  create_table "likes", force: :cascade do |t|
-    t.boolean  "reaction"
+  create_table "reactions", force: :cascade do |t|
+    t.integer  "emotion",     limit: 1, default: 0, null: false
     t.integer  "timeline_id"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
-  add_index "likes", ["timeline_id", "user_id"], name: "index_likes_on_timeline_id_and_user_id", unique: true
+  add_index "reactions", ["emotion"], name: "index_reactions_on_emotion"
+  add_index "reactions", ["timeline_id", "user_id"], name: "index_reactions_on_timeline_id_and_user_id", unique: true
 
   create_table "timelines", force: :cascade do |t|
     t.integer  "user_id"
