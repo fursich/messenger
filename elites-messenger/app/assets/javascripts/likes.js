@@ -1,6 +1,6 @@
 $(function(){
 
-    $('.clickale-like-link a').on('ajax:complete', function(event, data, status){
+    $('.emotion-icon').on('ajax:complete', function(event, data, status){
         
         if (status=='success') {
 
@@ -10,12 +10,23 @@ $(function(){
             // console.log(jsonData.likes_count_html);
 
             if (jsonData.saved=='true') {
-                if ( jsonData.html=='true') {
+
+                var unselectedBtn = $(".clickable-like-link-"+jsonData.t_id+" .selected");
+                unselectedBtn.removeClass("selected");
+                unselectedBtn.addClass("not-selected");
+                if (jsonData.b_id != 0) {
+                    var selectedBtn = $(".clickable-like-link-"+jsonData.t_id+" .emotion-icon:nth-child("+jsonData.active_button+")");
+                    selectedBtn.removeClass("not-selected");
+                    selectedBtn.addClass("selected");
+                }
+
+                if ( jsonData.counter=='true') {
                     $(".likes-counter-"+jsonData.t_id).html(jsonData.likes_count_html);
-                    // $(".clickable-like-link-"+jsonData.t_id).empty();
                 } else {
                     $(".likes-counter-"+jsonData.t_id).empty();
                 }
+            } else {
+                console.log ("save failure");
             }
         }
         

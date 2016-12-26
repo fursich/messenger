@@ -63,11 +63,11 @@
       
       .clickale-like-link {
         margin-top: 5px;
-        .emotion-icon-selected {
+        .emotion-icon.selected {
           opacity: 0.9;
           font-size: 60%;
         }
-        .emotion-icon-not-selected {
+        .emotion-icon.not-selected {
           opacity: 0.3;
           font-size: 50%;
         }
@@ -91,22 +91,16 @@
             margin-right: 15px;
           }
           .like-icon {
-            color: #B63;
           }
           .love-icon {
-            color: #f00;
           }
           .laugh-icon {
-            color: #08F;
           }
           .wonder-icon {
-            color: #666;
           }
           .weep-icon {
-            color: #666;
           }
           .anger-icon {
-            color: #666;
           }
         }
         

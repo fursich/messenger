@@ -3,7 +3,7 @@
     <div class='emotion-ctr-icon'>
         <% Reaction.emotions.each do |emo, emo_id| %>
             <% next if emo_id==0 %>        <!--id=0は「該当なし」扱いの特殊コード-->
-            <% ct = Timeline.find(t_id).number_of_reactions(emo_id) %>
+            <% ct = Timeline.find(t_id).number_of_reactions_by_emotion(emo_id) %>
             <% unless ct==0 %>
                 <div class = "<%= class_by_emotion(emo) %>">
                     <span class = "emotion-ctr-text"><%= ct %></span>

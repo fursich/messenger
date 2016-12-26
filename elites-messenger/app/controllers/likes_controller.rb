@@ -3,19 +3,24 @@ class LikesController < ApplicationController
   def create
 
     t_id = params[:id]
-    e_id = params[:emo_id]
+    e_key = params[:emo_id]
 
     reaction = Reaction.find_or_initialize_by(timeline_id: t_id, user_id: current_user.id)
 
-    if reaction.emotion == e_id             #Reactionの初期値は０なので、Reaction.newの場合は該当しない
-      if (reaction.destroy == false)        #before_destroyに失敗した場合false
+    if reaction.emotion == e_key            #同じアイコンが二度押しされた場合：初期値０なので、Reaction.newの場合は該当しない
+      b_id = 0                              #全てのボタンをnot selectedにする
+
+      reaction.destroy
+      if reaction.destroy == false          #レコード削除
         db_succeed = false
       else
         db_succeed = true
       end
     else
-      reaction.emotion = Reaction.emotions[e_id]
-      db_succeed = reaction.save                 #saveに失敗した場合false
+      b_id = Reaction.emotions[e_key]          #selectedの対象になるボタン番号
+
+      reaction.emotion = e_key                #新たに選択されたemotionをアップデート
+      db_succeed = reaction.save              #saveに失敗した場合false
     end
 
     if db_succeed
@@ -25,16 +30,12 @@ class LikesController < ApplicationController
         end
         format.json do
 
-          if (Timeline.find(t_id).has_emotion?(current_user.id, e_id)) && (Timeline.find(t_id).number_of_reactions(e_id)==1)
-            render json: {t_id: t_id, saved: 'true', html: 'false'}
-
+          if (Timeline.find(t_id).number_of_reactions==0)   #表示すべきリアクション（likeなど）が全てなくなった場合
+            render json: {t_id: t_id, active_button: b_id, saved: 'true', counter: 'false'}
           else
-            # total_likes = Reaction.like.where(timeline_id: t_id).count
-  
-            html = render_to_string partial: 'likes/like', layout: false, formats: :html, locals: {t_id: t_id}
-            render json: {likes_count_html: html, t_id: t_id, saved: 'true', html: 'true'}
-  
-            # render json: {timeline: total_likes}
+
+            html_ctr = render_to_string partial: 'likes/like', layout: false, formats: :html, locals: {t_id: t_id}
+            render json: {t_id: t_id, active_button: b_id, likes_count_html: html_ctr, saved: 'true', counter: 'true'}
           end
         end
       end
