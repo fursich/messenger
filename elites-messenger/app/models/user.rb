@@ -10,4 +10,5 @@ class User < ActiveRecord::Base
   validates :agreement, presence: true, acceptance: {accept: true}
   
   has_many :reactions, dependent: :destroy
+  
 end

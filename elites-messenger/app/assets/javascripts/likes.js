@@ -10,8 +10,12 @@ $(function(){
             // console.log(jsonData.likes_count_html);
 
             if (jsonData.saved=='true') {
-                $(".likes-counter-"+jsonData.t_id).html(jsonData.likes_count_html);
-                $(".clickable-like-link-"+jsonData.t_id).empty();
+                if ( jsonData.html=='true') {
+                    $(".likes-counter-"+jsonData.t_id).html(jsonData.likes_count_html);
+                    // $(".clickable-like-link-"+jsonData.t_id).empty();
+                } else {
+                    $(".likes-counter-"+jsonData.t_id).empty();
+                }
             }
         }
         

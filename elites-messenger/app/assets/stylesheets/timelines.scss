@@ -63,6 +63,14 @@
       
       .clickale-like-link {
         margin-top: 5px;
+        .emotion-icon-selected {
+          opacity: 0.9;
+          font-size: 60%;
+        }
+        .emotion-icon-not-selected {
+          opacity: 0.3;
+          font-size: 50%;
+        }
       }
       .likes-counter {
 

@@ -3,11 +3,10 @@ class Reaction < ActiveRecord::Base
     belongs_to :timelines
     belongs_to :users
 
-    enum emotion: {like: 0, love: 1, laugh: 2, wonder: 3, weep: 4, anger: 5}
+    enum emotion: {na: 0, like: 1, love: 2, laugh: 3, wonder: 4, weep: 5, anger: 6}
     validates   :emotion, presence: true
     validates   :timeline_id, presence: true
     validates   :user_id, presence: true
-
 
 end
 

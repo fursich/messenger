@@ -12,7 +12,11 @@ class Timeline < ActiveRecord::Base
     scope :not_reply, -> do
         where(reply_id: nil)
     end
-    def number_of_reactions (emo)
-        self.reactions.where(emotion: Reaction.emotions[emo]).count
+    def number_of_reactions (emo_id)
+        self.reactions.where(emotion: emo_id).count
+    end
+    def has_emotion?(u_id, emo_id)
+        return false unless Reaction.exists?(timeline_id: self.id, user_id: u_id)
+        ! self.reactions.where('user_id=? and emotion=?', u_id, emo_id).empty?
     end
 end

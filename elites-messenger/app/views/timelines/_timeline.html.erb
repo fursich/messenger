@@ -25,14 +25,17 @@
     <% end %>
 
 
-    <% unless t.reactions.exists?(user_id: current_user) %>
-      <div class="clickale-like-link clickable-like-link-<%= t.id %>">
-        <% Reaction.emotions.each do |emo, emo_id| %>
-          <!--とりあえずlikeを実装。後から、「再度クリックしたらunlikeできる」仕様にしたい-->
-          <%= link_to emo, create_like_on_timeline_path(id: t.id, emo_id: emo,format: :json), remote: true, method: :post %>
+    <div class="clickale-like-link clickable-like-link-<%= t.id %>">
+      <% Reaction.emotions.each do |emo, emo_id| %>
+        <% next if emo_id==0 %>      
+        <% if t.has_emotion?(current_user.id, emo_id) %>
+          <% cl = class_by_emotion(emo) + " emotion-icon-selected" %>
+        <% else %>
+          <% cl = class_by_emotion(emo) + " emotion-icon-not-selected" %>
         <% end %>
-      </div>
-    <% end %>
+        <%= link_to "", create_like_on_timeline_path(id: t.id, emo_id: emo,format: :json), remote: true, method: :post, class: cl %>
+      <% end %>
+    </div>
 
     <div class="likes-counter likes-counter-<%= t.id %>">
       <% if t.reactions.count>0 %>

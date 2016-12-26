@@ -21,6 +21,8 @@ module TimelinesHelper
             return "em em-cry weep-icon"
         when 'anger'
             return "em em-angry anger-icon"
+        else
+            return "na"
         end
     end
 
