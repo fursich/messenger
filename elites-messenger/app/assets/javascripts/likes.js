@@ -1,5 +1,15 @@
 $(function(){
 
+    $('.emotion-icons-row').hide();
+
+    $('.per').mouseenter(function(){
+        $(this).find('.emotion-icons-row').slideDown('fast');
+    })
+    $('.per').mouseleave(function(){
+        $(this).find('.emotion-icons-row').slideUp('fast');
+    })
+
+
     $('.emotion-icon').on('ajax:complete', function(event, data, status){
         
         if (status=='success') {
