@@ -2,7 +2,7 @@ class LikesController < ApplicationController
 
   def create
 
-    t_id = params[:id]
+    t_id = params[:timeline_id]
     e_key = params[:emo_id]
 
     reaction = Reaction.find_or_initialize_by(timeline_id: t_id, user_id: current_user.id)

@@ -7,6 +7,6 @@
         <% else %>
             <% cl = class_by_emotion(emo) + " emotion-icon not-selected" %>
         <% end %>
-        <%= link_to "", create_like_on_timeline_path(id: t_id, emo_id: emo, format: :json), remote: true, method: :post, class: cl %>
+        <%= link_to "", timeline_likes_path(timeline_id: t_id, emo_id: emo, format: :json), remote: true, method: :post, class: cl %>
     <% end %>
 </div>
