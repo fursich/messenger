@@ -62,20 +62,50 @@
       }
       
       .clickale-like-link {
-        font-size: 90%;
         margin-top: 5px;
+        .emotion-icon.selected {
+          opacity: 0.9;
+          font-size: 60%;
+        }
+        .emotion-icon.not-selected {
+          opacity: 0.3;
+          font-size: 50%;
+        }
       }
       .likes-counter {
-        font-size: 80%;
-        color: #666;
+
         hr {
           border: 0;
           height: 1px;
           background-color: #ccc;
           margin: 5px 0;
         }
+        .emotion-ctr-icon {
+          .emotion-ctr-text {
+            margin-left: 20px;
+            font-size: 120%;
+            font-weight: bold;
+          }
+          .em {
+            font-size: 90%;
+            margin-right: 15px;
+          }
+          .like-icon {
+          }
+          .love-icon {
+          }
+          .laugh-icon {
+          }
+          .wonder-icon {
+          }
+          .weep-icon {
+          }
+          .anger-icon {
+          }
+        }
+        
       }
-  
+      
     }
   }
 

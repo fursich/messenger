@@ -14,9 +14,7 @@ class TimelinesController < ApplicationController
   def update
     timeline = Timeline.find(params[:id])
     timeline.attributes = input_message_param
-    if timeline.valid?
-      timeline.save
-    else
+    unless timeline.save
       flash[:alert] = timeline.errors.full_messages
     end
     redirect_to action: :index    
@@ -27,8 +25,7 @@ class TimelinesController < ApplicationController
     timeline.attributes = input_message_param
     timeline.user_id = current_user.id
 
-    if timeline.valid?
-      timeline.save
+    if timeline.save
       respond_to do |format|
         format.html do
           redirect_to action: :index

@@ -9,5 +9,6 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :agreement, presence: true, acceptance: {accept: true}
   
-  has_many :likes, dependent: :destroy
+  has_many :reactions, dependent: :destroy
+  
 end
