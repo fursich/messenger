@@ -26,12 +26,12 @@
 
 
     <div class="clickale-like-link clickable-like-link-<%= t.id %>">
-      <%= render 'likes/likes_button', t_id: t.id  %>
+      <%= render 'likes/likes_button', tl: t  %>
     </div>
 
     <div class="likes-counter likes-counter-<%= t.id %>">
       <% if t.number_of_reactions>0 %>          <!-- リアクションがない場合は描画しない-->
-        <%= render 'likes/like', t_id: t.id  %>
+        <%= render 'likes/like', tl: t  %>
       <% end %>
     </div>
 
