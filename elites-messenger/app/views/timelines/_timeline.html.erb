@@ -23,18 +23,17 @@
     <%= link_to root_path(reply_id: t.id) do %>
       <%= button_tag 'Re', class: 'btn btn-info' %>
     <% end %>
-
-
-    <div class="clickale-like-link clickable-like-link-<%= t.id %>">
-      <%= render 'likes/likes_button', t_id: t.id  %>
-    </div>
-
+    <% unless t.likes.exists?(user_id: current_user) %>
+      <div class="clickale-like-link clickable-like-link-<%= t.id %>">
+        <%= link_to 'Like', timeline_likes_path(timeline_id: t.id, format: :json), remote: true, method: :post %>
+        <!--とりあえずlikeを実装。後から、「再度クリックしたらunlikeできる」仕様にしたい-->
+      </div>
+    <% end %>
     <div class="likes-counter likes-counter-<%= t.id %>">
-      <% if t.number_of_reactions>0 %>          <!-- リアクションがない場合は描画しない-->
-        <%= render 'likes/like', t_id: t.id  %>
+      <% if t.likes.count>0 %>
+        <%= render 'likes/like', ctr: t.likes.count %>
       <% end %>
     </div>
-
   <% end %>
 </div>
 
