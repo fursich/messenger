@@ -30,7 +30,7 @@ $(function(){
                     selectedBtn.addClass("selected");
                 }
 
-                if ( jsonData.counter=='true') {
+                if ( jsonData.likes_count_html != null) {
                     $(".likes-counter-"+jsonData.t_id).html(jsonData.likes_count_html);
                 } else {
                     $(".likes-counter-"+jsonData.t_id).empty();
